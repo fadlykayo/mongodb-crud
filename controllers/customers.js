@@ -1,4 +1,4 @@
-let Books = require('../models/customers')
+let Customers = require('../models/customers')
 
 module.exports = {
   getCustomers: (req, res) => {
@@ -30,7 +30,7 @@ module.exports = {
   },
   deleteCustomer: (req, res) => {
     Customers.findOneAndRemove({memberid: req.params.memberid}).then(function (data) {
-      res.send(`Deleted book with MemberId: ${req.params.memberid}`)
+      res.send(`Deleted Customer with MemberId: ${req.params.memberid}`)
     }).catch(function (err) {
       res.json(err)
     })

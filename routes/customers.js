@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-let customersController = require('../controllers/customers_controller')
+let customersController = require('../controllers/customers')
 
 /* GET home page. */
 

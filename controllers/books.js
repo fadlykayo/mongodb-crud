@@ -30,13 +30,14 @@ module.exports = {
   },
   deleteBook: (req, res) => {
     Books.findOneAndRemove({isbn: req.params.isbn}).then(function (data) {
-      res.send(`Deleted book with ISBN: ${req.params.isbn}`)
+      res.send(`Deleted Book with ISBN: ${req.params.isbn}`)
     }).catch(function (err) {
       res.json(err)
     })
   },
   updateBook: (req, res) => {
-    Books.findOneAndUpdate({ isbn: req.params.isbn }, req.body, {new: true}).then(function (data) {
+    Books.findOneAndUpdate({isbn: req.params.isbn}, req.body, {new: true}).then(function (data) {
+      // new true -> mengembalikan data baru
       res.json(data)
     }).catch(function (err) {
       res.json(err)

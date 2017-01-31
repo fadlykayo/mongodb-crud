@@ -1,6 +1,6 @@
-var express = require('express');
-var router = express.Router();
-let booksController = require ('../controllers/books_controller');
+var express = require('express')
+var router = express.Router()
+let booksController = require('../controllers/books')
 
 /* GET home page. */
 
@@ -16,4 +16,4 @@ router.put('/:isbn', booksController.updateBook)
 //
 // router.post('/signin', libraryController.signIn)
 
-module.exports = router;
+module.exports = router
