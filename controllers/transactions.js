@@ -31,8 +31,16 @@ module.exports = {
     })
   },
   addItem: (req, res) => {
-    Transactions.findOneAndUpdate({_id: req.params.transactionid}, {$push: {booklist: {bookid: req.body.bookid, qty: req.body.qty}}}, {upsert: true}).then(function (data) {
-      res.json({data}) // gak data terbaru
+    // {upsert: true}
+    Transactions.findOneAndUpdate({_id: req.params.transactionid}, {$push: {booklist: {bookid: req.body.bookid, qty: req.body.qty}}}, {new: true}).then(function (data) {
+      res.json({data})
+    }).catch(function (err) {
+      res.json(err)
+    })
+  },
+  populateItem: (req, res) => {
+    Transactions.find({_id: req.params.transactionid}).populate('memberid').populate('booklist.bookid').then(function (data) {
+      res.json(data)
     }).catch(function (err) {
       res.json(err)
     })

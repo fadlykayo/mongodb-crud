@@ -12,6 +12,8 @@ router.post('/', customersController.createTransaction)
 
 router.post('/:transactionid', customersController.addItem)
 
+router.post('/item/:transactionid', customersController.populateItem)
+
 router.delete('/:transactionid', customersController.deleteTransaction)
 
 router.put('/:transactionid', customersController.updateTransaction)
