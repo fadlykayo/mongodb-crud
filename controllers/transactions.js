@@ -9,7 +9,7 @@ module.exports = {
     })
   },
   getTransaction: (req, res) => {
-    Transactions.find({memberid: req.params.memberid}).then(function (data) {
+    Transactions.find({_id: req.params.transactionid}).then(function (data) {
       res.send({Transaction: data})
     }).catch(function (err) {
       res.json(err)
@@ -18,29 +18,34 @@ module.exports = {
   createTransaction: (req, res) => {
     Transactions.create({
       memberid: req.body.memberid,
-      booklist: []
-      // days: req.body.days,
-      // out_date: req.body.out_date,
-      // due_date: req.body.due_date,
-      // in_date: req.body.in_date,
-      // fine: req.body.fine,
-
+      booklist: [],
+      days: req.body.days,
+      out_date: req.body.out_date,
+      due_date: req.body.due_date,
+      in_date: req.body.in_date,
+      fine: req.body.fine
     }).then(function (data) {
       res.json({data})
     }).catch(function (err) {
       res.json(err)
     })
   },
+  addItem: (req, res) => {
+    Transactions.findOneAndUpdate({_id: req.params.transactionid}, {$push: {booklist: {bookid: req.body.bookid, qty: req.body.qty}}}, {upsert: true}).then(function (data) {
+      res.json({data}) // gak data terbaru
+    }).catch(function (err) {
+      res.json(err)
+    })
+  },
   deleteTransaction: (req, res) => {
-    Transactions.findOneAndRemove({memberid: req.params.memberid}).then(function (data) {
-      res.send(`Deleted Customer with MemberId: ${req.params.memberid}`)
+    Transactions.findOneAndRemove({_id: req.params.transactionid}).then(function (data) {
+      res.send(`Deleted Transaction with Id: ${req.params.transactionid}`)
     }).catch(function (err) {
       res.json(err)
     })
   },
   updateTransaction: (req, res) => {
-    Transactions.findOneAndUpdate({memberid: req.params.memberid}, req.body, {new: true}).then(function (data) {
-      // new true -> mengembalikan data baru
+    Transactions.findOneAndUpdate({_id: req.params.transactionid}, req.body, {new: true}).then(function (data) {
       res.json(data)
     }).catch(function (err) {
       res.json(err)

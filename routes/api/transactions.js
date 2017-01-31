@@ -6,13 +6,15 @@ let customersController = require('../../controllers/transactions')
 
 router.get('/', customersController.getTransactions)
 
-router.get('/:memberid', customersController.getTransaction)
+router.get('/:transactionid', customersController.getTransaction)
 
 router.post('/', customersController.createTransaction)
 
-router.delete('/:memberid', customersController.deleteTransaction)
+router.post('/:transactionid', customersController.addItem)
 
-router.put('/:memberid', customersController.updateTransaction)
+router.delete('/:transactionid', customersController.deleteTransaction)
+
+router.put('/:transactionid', customersController.updateTransaction)
 //
 // router.post('/signin', libraryController.signIn)
 
